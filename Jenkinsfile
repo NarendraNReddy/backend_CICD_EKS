@@ -12,9 +12,9 @@ pipeline {
     }
     environment{
         def appVersion = '' //variable declaration
-        nexusUrl = 'nexus.daws78s.online:8081'
+        nexusUrl = 'nexus.narendra.shop:8081'
         region = "us-east-1"
-        account_id = "315069654700"
+        account_id = "905418111046"
     }
     stages {
         stage('read the version'){
@@ -46,17 +46,17 @@ pipeline {
         stage('Docker build'){
             steps{
                 sh """
-                    docker build -t backend:${appVersion} .
+                    aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
+
+                    docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion} .
+
+                    docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
 
                 """
             }
         }
 
-    // aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${region}.amazonaws.com
 
-    // docker build -t ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion} .
-
-    // docker push ${account_id}.dkr.ecr.${region}.amazonaws.com/expense-backend:${appVersion}
         stage('Deploy'){
             steps{
                 sh """
