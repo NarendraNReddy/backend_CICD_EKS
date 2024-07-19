@@ -9,3 +9,4 @@ def configMap = [
 ]
 
 pipelineDecission.decidePipeline(configMap)
+
