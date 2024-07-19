@@ -1,10 +1,11 @@
-@Library('Jenkins-shared-library') _
-// variabel declaration 
+@Library('jenkins-shared-library') _
+
+// create variable of map type and set the values
 
 def configMap = [
-    type: "nodejsEKS"
-    component: "backend"
+    type: "nodejsEKS",
+    component: "backend",
     project: "expense"
 ]
 
-pipelineDecision.decidePipeline(configMap)
+pipelineDecission.decidePipeline(configMap)
