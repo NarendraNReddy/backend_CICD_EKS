@@ -8,7 +8,7 @@ def configMap = [
     project: "expense"
 ]
 
-echo "environment: $env"
+sh "environment: $env"
 
 
 
