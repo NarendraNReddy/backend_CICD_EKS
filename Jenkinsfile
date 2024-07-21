@@ -7,9 +7,9 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    parameters{
-        booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
-    }
+    // parameters{
+    //     booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
+    // }
     environment{
         def appVersion = '' //variable declaration
         nexusUrl = 'nexus.narendra.shop:8081'
@@ -63,7 +63,7 @@ pipeline {
                     aws eks update-kubeconfig --region us-east-1 --name expense-dev
                     cd helm
                     sed -i 's/IMAGE_VERSION/${appVersion}/g' values.yaml
-                    helm upgrade backend .
+                    helm install backend .
                 """
             }
         }
